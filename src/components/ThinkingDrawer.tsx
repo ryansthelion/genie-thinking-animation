@@ -6,6 +6,8 @@ type ThinkingDrawerProps = {
   collapsed?: boolean;
   label?: string;
   shimmer?: boolean;
+  /** id for aria-controls when the drawer toggles a trace region */
+  traceControlsId?: string;
   onToggle?: () => void;
 };
 
@@ -13,6 +15,7 @@ export function ThinkingDrawer({
   collapsed = true,
   label = "Thinking",
   shimmer = true,
+  traceControlsId = "thinking-trace",
   onToggle,
 }: ThinkingDrawerProps) {
   const Tag = onToggle ? "button" : "div";
@@ -25,7 +28,7 @@ export function ThinkingDrawer({
       data-collapsed={collapsed}
       data-shimmer={shimmer}
       aria-expanded={onToggle ? !collapsed : undefined}
-      aria-controls={onToggle ? "thinking-trace" : undefined}
+      aria-controls={onToggle ? traceControlsId : undefined}
       onClick={onToggle}
     >
       <div className="thinking-drawer__row" data-node-id="3112:6488">

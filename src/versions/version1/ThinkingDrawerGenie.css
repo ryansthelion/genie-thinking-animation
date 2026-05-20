@@ -1,0 +1,96 @@
+/* Version 1 — host button wraps genie + embedded ThinkingDrawer (shimmer unchanged) */
+.thinking-drawer-genie-host {
+  display: inline-flex;
+  align-items: center;
+  border: none;
+  border-radius: var(--border-radius-md);
+  background: var(--action-default-background);
+  padding: var(--spacing-xs);
+  font: inherit;
+  color: inherit;
+  cursor: default;
+}
+
+button.thinking-drawer-genie-host {
+  cursor: pointer;
+}
+
+button.thinking-drawer-genie-host:hover {
+  background: var(--drawer-hover-bg);
+}
+
+button.thinking-drawer-genie-host:active {
+  background: var(--drawer-press-bg);
+}
+
+button.thinking-drawer-genie-host:focus-visible {
+  outline: 2px solid var(--text-secondary);
+  outline-offset: 2px;
+}
+
+.thinking-drawer-genie__row {
+  --drawer-genie-icon-size: 24px;
+  --drawer-genie-row-height: 28px;
+
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  min-height: var(--drawer-genie-row-height);
+}
+
+.thinking-drawer-genie__genie {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--drawer-genie-icon-size);
+  height: var(--drawer-genie-icon-size);
+  overflow: visible;
+  pointer-events: none;
+}
+
+.thinking-drawer-genie__genie-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Slide/fade drawer in after genie — no opacity (keeps child shimmer blend intact) */
+.thinking-drawer-genie__drawer-slot {
+  flex-shrink: 0;
+  max-width: 0;
+  overflow: hidden;
+  visibility: hidden;
+  transition: max-width var(--enter-fade-in-duration)
+    var(--enter-from-below-easing);
+}
+
+.thinking-drawer-genie__drawer-slot--visible {
+  max-width: 160px;
+  visibility: visible;
+}
+
+/* Embedded drawer: chrome lives on host; keep only label row + shimmer */
+.thinking-drawer-genie-host .thinking-drawer {
+  height: var(--drawer-genie-row-height);
+  padding: 0;
+  background: transparent;
+  overflow: visible;
+}
+
+button.thinking-drawer-genie-host .thinking-drawer:hover,
+button.thinking-drawer-genie-host .thinking-drawer:active {
+  background: transparent;
+}
+
+.thinking-drawer-genie-host .thinking-drawer__row {
+  margin-top: 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thinking-drawer-genie__drawer-slot {
+    visibility: visible;
+    transition: none;
+  }
+}

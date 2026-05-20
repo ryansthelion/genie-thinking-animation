@@ -1,25 +1,16 @@
-import { GenieResponse } from "./GenieResponse";
-import { ThinkingDrawer } from "./ThinkingDrawer";
-import { Multisteps } from "./Multisteps";
-import { PromptInput } from "./PromptInput";
+import { GenieResponse } from "../../components/GenieResponse";
+import { ThinkingDrawer } from "../../components/ThinkingDrawer";
+import { Multisteps } from "../../components/Multisteps";
+import { PromptInput } from "../../components/PromptInput";
 import { useEffect, useState } from "react";
-import { useEntranceKey } from "../hooks/useEntranceKey";
-import { useGenieAfterBubble } from "../hooks/useGenieAfterBubble";
-import { GENIE_SVG_SRC, GENIE_SVG_STATIC_SRC } from "../timing";
-import "./ChatRow.css";
+import { useEntranceKey } from "../../hooks/useEntranceKey";
+import { useGenieAfterBubble } from "../../hooks/useGenieAfterBubble";
+import { GENIE_SVG_SRC, GENIE_SVG_STATIC_SRC } from "../../timing";
+import type { AnimationPhase } from "../shared/animationPhases";
+import "../shared/chatRowLayout.css";
+import "./Version3ChatRow.css";
 
-export type AnimationPhase =
-  | "user-only"
-  | "genie"
-  | "thinking-header"
-  | "trace-pulse"
-  | "trace-title"
-  | "trace-description"
-  | "trace-tool"
-  | "thought-complete"
-  | "response";
-
-type ChatRowProps = {
+type Version3ChatRowProps = {
   phase: AnimationPhase;
   drawerLabel?: string;
   drawerShimmer?: boolean;
@@ -32,7 +23,8 @@ type ChatRowProps = {
 const USER_MESSAGE =
   "Which engineers at Databricks are using vibe coding the most (by whatever metric)?";
 
-export function ChatRow({
+/** Version 3 — genie inline, 8px left of ThinkingDrawer (no thread-bottom icon). */
+export function Version3ChatRow({
   phase,
   drawerLabel = "Thinking",
   drawerShimmer = true,
@@ -40,7 +32,7 @@ export function ChatRow({
   genieAnimating = true,
   onGenieReveal,
   onResponseStreamComplete,
-}: ChatRowProps) {
+}: Version3ChatRowProps) {
   const bubbleKey = useEntranceKey(phase, "user-only");
   const genieKey = useEntranceKey(phase, "genie");
   const genieVisible = useGenieAfterBubble(phase, bubbleKey, onGenieReveal);
@@ -100,9 +92,10 @@ export function ChatRow({
   }, [showDrawer, phase]);
 
   const showThinkingDrawer = drawerPinned || keepThinkingDrawer || showDrawer;
+  const showAgentHeader = showGenie;
 
   return (
-    <div className="chat-row" data-node-id="9982:71369">
+    <div className="chat-row" data-version="3" data-node-id="9982:71369">
       <div className="chat-row__thread" data-node-id="9982:71370">
         <div className="message-container" data-node-id="9982:71371">
           <div className="user-message" data-node-id="I9982:71371;4490:42766">
@@ -119,27 +112,45 @@ export function ChatRow({
 
         {showGenie ? (
           <div
-            className={`agent-message ${showThinkingDrawer ? "agent-message--open" : ""}`}
+            className={`agent-message ${
+              showAgentHeader ? "agent-message--open" : ""
+            }`}
             data-node-id="9982:70357"
           >
-            {showThinkingDrawer ? (
-              <ThinkingDrawer
-                collapsed={drawerCollapsed}
-                label={drawerLabel}
-                shimmer={drawerShimmer}
-                onToggle={
-                  canToggleTrace
-                    ? () => setTraceExpanded((open) => !open)
-                    : undefined
-                }
-              />
-            ) : null}
+            <div className="version3-agent-header">
+              <div
+                key={genieKey}
+                className="version3-agent-header__genie enter-from-below"
+                data-node-id="9982:71406"
+                aria-hidden
+              >
+                <img
+                  src={genieAnimating ? GENIE_SVG_SRC : GENIE_SVG_STATIC_SRC}
+                  alt=""
+                  className="version3-agent-header__genie-img"
+                  draggable={false}
+                />
+              </div>
+              {showThinkingDrawer ? (
+                <ThinkingDrawer
+                  collapsed={drawerCollapsed}
+                  label={drawerLabel}
+                  shimmer={drawerShimmer}
+                  traceControlsId="thinking-trace-v3"
+                  onToggle={
+                    canToggleTrace
+                      ? () => setTraceExpanded((open) => !open)
+                      : undefined
+                  }
+                />
+              ) : null}
+            </div>
           </div>
         ) : null}
 
         {showMultisteps ? (
           <Multisteps
-            id="thinking-trace"
+            id="thinking-trace-v3"
             entranceKey={showMultistepsExpanded ? traceKey + 1000 : traceKey}
             titleEntranceKey={showMultistepsExpanded ? titleKey + 1000 : titleKey}
             descriptionEntranceKey={
@@ -171,27 +182,6 @@ export function ChatRow({
           active={showResponse}
           onStreamComplete={onResponseStreamComplete}
         />
-
-        {showGenie ? (
-          <>
-            <div
-              key={genieKey}
-              className={`genie-icon enter-from-below ${
-                showThinkingDrawer && !showResponse
-                  ? "genie-icon--offset"
-                  : ""
-              } ${showResponse ? "genie-icon--after-response" : ""}`}
-              data-node-id="9982:71406"
-            >
-              <img
-                src={genieAnimating ? GENIE_SVG_SRC : GENIE_SVG_STATIC_SRC}
-                alt=""
-                className="genie-icon__img"
-              />
-            </div>
-            <div className="chat-row__thread-spacer" aria-hidden />
-          </>
-        ) : null}
       </div>
 
       <PromptInput />

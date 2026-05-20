@@ -1,6 +1,9 @@
 /** Matches --enter-from-below-duration in enter-animation.css */
 export const BUBBLE_ENTRANCE_MS = 450;
 export const GENIE_AFTER_BUBBLE_MS = 200;
+
+/** Genie-only before label + chevron fade in (Version 1 ThinkingDrawerGenie) */
+export const DRAWER_GENIE_DETAILS_DELAY_MS = 40;
 export const AUTO_ADVANCE_MS = 2000;
 
 /** Delay before auto-advancing from each phase to the next. */

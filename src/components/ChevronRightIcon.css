@@ -32,17 +32,3 @@
   height: 100%;
   max-width: none;
 }
-
-/* chevronDownIcon — Figma inset + rotate 90° */
-.chevron-right-icon--down .chevron-right-icon__inset--down {
-  top: 37.5%;
-  right: 25%;
-  bottom: 31.25%;
-  left: 25%;
-}
-
-.chevron-right-icon__flip--down {
-  width: 100cqh;
-  height: 100cqw;
-  transform: scaleX(-1) rotate(90deg);
-}

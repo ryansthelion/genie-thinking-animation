@@ -1,0 +1,88 @@
+/* Version 3 — genie inline, 8px left of thinking drawer */
+.version3-agent-header {
+  --version3-genie-size: 25px;
+  --version3-genie-gap: 8px;
+  --version3-header-height: 28px;
+  --version3-drawer-row-height: 28px;
+
+  display: flex;
+  align-items: center;
+  gap: var(--version3-genie-gap);
+  min-height: var(--version3-header-height);
+}
+
+/* Genie sits left by default so drawer label aligns with genie-response */
+.version3-agent-header__genie {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--version3-genie-size);
+  height: var(--version3-genie-size);
+  margin-left: calc(-1 * (var(--version3-genie-size) + var(--version3-genie-gap)));
+  overflow: visible;
+  pointer-events: none;
+}
+
+.version3-agent-header__genie-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.chat-row[data-version="3"] .agent-message {
+  align-items: center;
+  overflow: visible;
+}
+
+.chat-row[data-version="3"] .agent-message--open {
+  max-height: 40px;
+}
+
+/* Trace dot aligns with genie-response (no extra left inset) */
+.chat-row[data-version="3"] #thinking-trace-v3.multisteps {
+  padding-left: 0;
+}
+
+.chat-row[data-version="3"] #thinking-trace-v3 .multisteps__step {
+  padding-left: 0;
+}
+
+.version3-agent-header .thinking-drawer {
+  display: inline-flex;
+  align-items: center;
+  align-self: center;
+  height: var(--version3-drawer-row-height);
+  min-height: var(--version3-drawer-row-height);
+  margin-top: 2px;
+  padding: 0 var(--spacing-xs) 0 0;
+}
+
+.version3-agent-header .thinking-drawer__row {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: var(--version3-drawer-row-height);
+  min-height: var(--version3-drawer-row-height);
+}
+
+.version3-agent-header .thinking-drawer__shimmer {
+  display: flex;
+  align-items: center;
+  height: var(--version3-drawer-row-height);
+}
+
+.version3-agent-header .thinking-drawer__label {
+  display: inline-flex;
+  align-items: center;
+  height: var(--version3-drawer-row-height);
+  line-height: 1;
+}
+
+.version3-agent-header .thinking-drawer__row .chevron-right-icon,
+.version3-agent-header .thinking-drawer__row .chevron-down-icon {
+  align-self: center;
+}
+

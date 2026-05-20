@@ -80,6 +80,24 @@
   overflow: visible;
 }
 
+.chat-row[data-version="1"] .agent-message {
+  align-items: center;
+}
+
+.chat-row[data-version="1"] .agent-message--open {
+  max-height: 56px;
+}
+
+/* Version 1: dot center = drawer genie center (4px + 12px) − 4px step pad − 6px status col */
+.chat-row[data-version="1"] #thinking-trace-v2 {
+  padding-left: 6px;
+}
+
+/* Version 2: dot center = genie center (20px = half of 40px thread icon) − 4px step pad − 6px status col */
+.chat-row[data-version="2"] #thinking-trace {
+  padding-left: 10px;
+}
+
 .genie-icon {
   position: relative;
   width: 40px;
@@ -100,7 +118,7 @@
 }
 
 .genie-icon--after-response {
-  margin-top: 20px;
+  margin-top: 12px;
 }
 
 .chat-row__thread-spacer {

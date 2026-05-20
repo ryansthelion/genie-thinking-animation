@@ -40,6 +40,9 @@
   --spacing-md: 16px;
   --spacing-lg: 24px;
 
+  /** Fixed settings bar (8+8 padding + 28px control + 1px border) */
+  --settings-bar-height: 45px;
+
   /** Fixed prompt stack (box-outer ~114px + hint + gaps); used for scroll inset */
   --prompt-input-stack-height: 138px;
 

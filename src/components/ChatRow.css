@@ -1,0 +1,131 @@
+.chat-row {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: var(--spacing-md);
+  padding-bottom: 0;
+  background: var(--background-secondary);
+  overflow: visible;
+}
+
+.chat-row__thread {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 720px;
+  padding-bottom: calc(
+    var(--prompt-input-stack-height) + var(--spacing-md) +
+      env(safe-area-inset-bottom, 0px)
+  );
+}
+
+.message-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 22px 0;
+  overflow: visible;
+}
+
+.user-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  min-height: 36px;
+  border-radius: 16px;
+}
+
+.user-message__menu {
+  width: 56px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.user-message__bubble {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 8px 12px;
+  border-radius: 16px;
+  background: var(--black-alpha-04);
+}
+
+.user-message__bubble p {
+  margin: 0;
+  font: var(--font-paragraph-lg);
+  letter-spacing: 0;
+  color: var(--text-primary-var);
+  word-break: break-word;
+  white-space: nowrap;
+}
+
+.agent-message {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--enter-fade-in-duration)
+    var(--enter-from-below-easing);
+}
+
+.agent-message--open {
+  max-height: 40px;
+  overflow: visible;
+}
+
+.genie-icon {
+  position: relative;
+  width: 40px;
+  height: 41px;
+  flex-shrink: 0;
+  overflow: visible;
+  transition: margin-top var(--enter-fade-in-duration)
+    var(--enter-from-below-easing);
+}
+
+.genie-icon.enter-from-below {
+  --enter-from-below-offset: 60px;
+  --enter-from-below-duration: 0.25s;
+}
+
+.genie-icon--offset {
+  margin-top: 0;
+}
+
+.genie-icon--after-response {
+  margin-top: 20px;
+}
+
+.chat-row__thread-spacer {
+  flex-shrink: 0;
+  width: 100%;
+  height: 48px;
+}
+
+.genie-icon__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .agent-message {
+    transition: none;
+  }
+
+  .agent-message--open {
+    max-height: 40px;
+  }
+
+  .genie-icon {
+    transition: none;
+  }
+}

@@ -1,0 +1,53 @@
+/* Shared entrance — Figma Animation 1 (9982:70342 → 9982:70350) */
+:root {
+  --enter-from-below-duration: 0.45s;
+  --enter-from-below-easing: cubic-bezier(0.22, 1, 0.36, 1);
+  --enter-from-below-offset: 110px;
+  --enter-fade-in-duration: 0.25s;
+}
+
+.enter-fade-in {
+  opacity: 0;
+  animation: enter-fade-in var(--enter-fade-in-duration)
+    var(--enter-from-below-easing) forwards;
+}
+
+@keyframes enter-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.enter-from-below {
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: enter-from-below var(--enter-from-below-duration)
+    var(--enter-from-below-easing) forwards;
+}
+
+@keyframes enter-from-below {
+  0% {
+    opacity: 0;
+    transform: translateY(var(--enter-from-below-offset));
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enter-from-below {
+    opacity: 1;
+    animation: none;
+    transform: none;
+  }
+
+  .enter-fade-in {
+    opacity: 1;
+    animation: none;
+  }
+}

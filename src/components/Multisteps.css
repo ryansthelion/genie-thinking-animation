@@ -1,0 +1,148 @@
+.multisteps {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: var(--spacing-mid) var(--spacing-xs);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+}
+
+/* Faster than global enter-from-below (0.45s) — trace block + children */
+.multisteps.enter-from-below,
+.multisteps .enter-from-below {
+  --enter-from-below-duration: 0.3s;
+  --enter-from-below-offset: 80px;
+}
+
+.multisteps__fade-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background: linear-gradient(
+    180deg,
+    var(--background-secondary) 0%,
+    rgba(249, 247, 244, 0) 37.917%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.multisteps__fade-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 20px;
+  background: linear-gradient(
+    0deg,
+    var(--background-secondary) 62.083%,
+    rgba(249, 247, 244, 0) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.multisteps__step {
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: flex-start;
+  width: 100%;
+  padding: 0 var(--spacing-xs);
+}
+
+.multisteps__status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  width: 12px;
+  /* Match step title line box (12px / 1.4) so dot centers on title */
+  min-height: calc(12px * 1.4);
+}
+
+.multisteps__status .animation-dot-pulsing {
+  position: relative;
+  z-index: 1;
+}
+
+.multisteps__status--line::after {
+  content: "";
+  position: absolute;
+  top: calc(12px * 1.4 / 2);
+  left: 5.5px;
+  z-index: 0;
+  width: 1px;
+  height: 1000px;
+  background: var(--action-disabled-border);
+}
+
+.multisteps__text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  padding-bottom: var(--spacing-lg);
+}
+
+.multisteps__title {
+  margin: 0;
+  font: var(--font-semibold-12);
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.multisteps__description {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-mid);
+  width: 100%;
+}
+
+.multisteps__body {
+  margin: 0;
+  font: var(--font-regular-12);
+  color: var(--text-secondary);
+  word-break: break-word;
+}
+
+.tool-call {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  width: 100%;
+  height: 33px;
+  padding: var(--spacing-sm);
+  border: 1px solid var(--border-default);
+  border-radius: var(--border-radius-md);
+  background: transparent;
+  overflow: hidden;
+}
+
+.tool-call__icon {
+  flex-shrink: 0;
+}
+
+.tool-call__query {
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+  font: var(--font-regular-12);
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tool-call__meta {
+  margin: 0;
+  flex-shrink: 0;
+  font: var(--font-regular-12);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}

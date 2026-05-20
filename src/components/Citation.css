@@ -1,0 +1,65 @@
+/* Figma Source — Citations (node 3432:6834) */
+
+.citation {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  max-width: 160px;
+  height: 24px;
+  padding: var(--spacing-xs) 6px;
+  border: none;
+  border-radius: var(--border-radius-full);
+  background: var(--action-default-background-hover);
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.citation--logo {
+  padding-left: var(--spacing-xs);
+  padding-right: 6px;
+}
+
+.citation:hover,
+.citation:active,
+.citation--selected {
+  background: var(--action-default-background-press);
+}
+
+.citation__icon {
+  flex-shrink: 0;
+}
+
+.citation__logo {
+  position: relative;
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: var(--border-radius-full);
+  overflow: hidden;
+}
+
+.citation__logo-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--border-radius-full);
+}
+
+.citation__label {
+  flex: 1 1 0;
+  min-width: 0;
+  font: var(--font-hint);
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: break-word;
+}
+
+.citation .citation__label {
+  text-align: left;
+}

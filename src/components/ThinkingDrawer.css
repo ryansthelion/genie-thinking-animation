@@ -1,0 +1,90 @@
+.thinking-drawer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  height: 28px;
+  padding: var(--spacing-xs) var(--spacing-xs) var(--spacing-xs) 0;
+  border: none;
+  border-radius: var(--border-radius-md);
+  background: var(--action-default-background);
+  overflow: hidden;
+  font: inherit;
+  color: inherit;
+  cursor: default;
+}
+
+button.thinking-drawer {
+  cursor: pointer;
+}
+
+button.thinking-drawer:hover {
+  background: var(--drawer-hover-bg);
+}
+
+button.thinking-drawer:active {
+  background: var(--drawer-press-bg);
+}
+
+button.thinking-drawer:focus-visible {
+  outline: 2px solid var(--text-secondary);
+  outline-offset: 2px;
+}
+
+.thinking-drawer__row {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.thinking-drawer__shimmer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.thinking-drawer__label {
+  font: var(--font-semibold-12);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.thinking-drawer[data-shimmer="false"] .thinking-drawer__label {
+  position: relative;
+  z-index: 0;
+}
+
+/* Figma shimmer — dark gradient sweep + screen blend (node 3112:6489) */
+.thinking-drawer__shimmer-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -48px;
+  width: 48px;
+  background: linear-gradient(
+    90deg,
+    var(--text-primary) 0%,
+    var(--text-secondary-one) 50%,
+    var(--text-primary) 100%
+  );
+  mix-blend-mode: screen;
+  pointer-events: none;
+  animation: thinking-shimmer 1.6s ease-in-out infinite;
+}
+
+@keyframes thinking-shimmer {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(120px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thinking-drawer__shimmer-overlay {
+    animation: none;
+    opacity: 0;
+  }
+}

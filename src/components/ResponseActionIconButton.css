@@ -1,0 +1,33 @@
+.response-action-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  border-radius: var(--border-radius-full);
+  background: var(--action-default-background);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.response-action-icon-button:hover {
+  background: var(--action-icon-hover-bg);
+}
+
+.response-action-icon-button:active,
+.response-action-icon-button--pressed {
+  background: var(--action-icon-press-bg);
+}
+
+.response-action-icon-button:focus-visible {
+  outline: 2px solid var(--action-icon-press-bg);
+  outline-offset: 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .response-action-icon-button {
+    transition: none;
+  }
+}

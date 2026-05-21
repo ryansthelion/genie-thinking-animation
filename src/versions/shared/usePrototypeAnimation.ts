@@ -20,7 +20,7 @@ export function usePrototypeAnimation() {
   }, []);
 
   useEffect(() => {
-    if (phase === "response") {
+    if (phase === "response" || phase === "user-only") {
       setResponseStreamComplete(false);
     }
   }, [phase]);
@@ -81,6 +81,7 @@ export function usePrototypeAnimation() {
     drawerShimmer,
     keepThinkingDrawer: showThoughtSummary,
     genieAnimating,
+    hideDrawerGenie: showThoughtSummary,
     onGenieReveal: handleGenieReveal,
     onResponseStreamComplete: handleResponseStreamComplete,
   };

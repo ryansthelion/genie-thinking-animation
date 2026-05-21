@@ -2,10 +2,12 @@
 .thinking-drawer-genie-host {
   display: inline-flex;
   align-items: center;
+  box-sizing: border-box;
+  height: 28px;
   border: none;
   border-radius: var(--border-radius-md);
   background: var(--action-default-background);
-  padding: var(--spacing-xs);
+  padding: 0 var(--spacing-xs);
   font: inherit;
   color: inherit;
   cursor: default;
@@ -35,6 +37,7 @@ button.thinking-drawer-genie-host:focus-visible {
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
+  height: var(--drawer-genie-row-height);
   min-height: var(--drawer-genie-row-height);
 }
 
@@ -45,8 +48,20 @@ button.thinking-drawer-genie-host:focus-visible {
   justify-content: center;
   width: var(--drawer-genie-icon-size);
   height: var(--drawer-genie-icon-size);
-  overflow: visible;
+  overflow: hidden;
   pointer-events: none;
+  transition:
+    opacity var(--enter-fade-in-duration) var(--enter-from-below-easing),
+    width var(--enter-fade-in-duration) var(--enter-from-below-easing);
+}
+
+.thinking-drawer-genie-host[data-genie-hidden="true"] .thinking-drawer-genie__genie {
+  width: 0;
+  opacity: 0;
+}
+
+.thinking-drawer-genie-host[data-genie-hidden="true"] .thinking-drawer-genie__row {
+  gap: 0;
 }
 
 .thinking-drawer-genie__genie-img {
@@ -85,10 +100,19 @@ button.thinking-drawer-genie-host .thinking-drawer:active {
 }
 
 .thinking-drawer-genie-host .thinking-drawer__row {
-  margin-top: 1px;
+  margin-top: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .thinking-drawer-genie__genie {
+    transition: none;
+  }
+
+  .thinking-drawer-genie-host[data-genie-hidden="true"] .thinking-drawer-genie__genie {
+    width: 0;
+    opacity: 0;
+  }
+
   .thinking-drawer-genie__drawer-slot {
     visibility: visible;
     transition: none;

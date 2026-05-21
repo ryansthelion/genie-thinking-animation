@@ -14,6 +14,7 @@ type Version1ChatRowProps = {
   drawerShimmer?: boolean;
   keepThinkingDrawer?: boolean;
   genieAnimating?: boolean;
+  hideDrawerGenie?: boolean;
   onGenieReveal?: () => void;
   onResponseStreamComplete?: () => void;
 };
@@ -28,6 +29,7 @@ export function Version1ChatRow({
   drawerShimmer = true,
   keepThinkingDrawer = false,
   genieAnimating = true,
+  hideDrawerGenie = false,
   onGenieReveal,
   onResponseStreamComplete,
 }: Version1ChatRowProps) {
@@ -124,6 +126,7 @@ export function Version1ChatRow({
                 label={drawerLabel}
                 shimmer={drawerShimmer}
                 genieAnimating={genieAnimating}
+                hideGenie={hideDrawerGenie}
                 onToggle={
                   canToggleTrace
                     ? () => setTraceExpanded((open) => !open)

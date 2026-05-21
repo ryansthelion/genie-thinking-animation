@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ThinkingDrawer } from "../../components/ThinkingDrawer";
 import {
   DRAWER_GENIE_DETAILS_DELAY_MS,
@@ -12,6 +12,8 @@ type ThinkingDrawerGenieProps = {
   label?: string;
   shimmer?: boolean;
   genieAnimating?: boolean;
+  /** Fade out drawer genie and shift label/chevron left after response finishes */
+  hideGenie?: boolean;
   showGenie?: boolean;
   /** Resets the label reveal when the prototype cycle restarts */
   genieEntranceKey?: number;
@@ -26,26 +28,55 @@ export function ThinkingDrawerGenie({
   label = "Thinking",
   shimmer = true,
   genieAnimating = true,
+  hideGenie = false,
   showGenie = true,
   genieEntranceKey = 0,
   onToggle,
 }: ThinkingDrawerGenieProps) {
   const [drawerRevealed, setDrawerRevealed] = useState(false);
+  const revealTimeoutRef = useRef<number | null>(null);
   const Tag = onToggle ? "button" : "div";
+
+  const clearRevealTimeout = useCallback(() => {
+    if (revealTimeoutRef.current !== null) {
+      window.clearTimeout(revealTimeoutRef.current);
+      revealTimeoutRef.current = null;
+    }
+  }, []);
+
+  const scheduleDrawerReveal = useCallback(() => {
+    clearRevealTimeout();
+    revealTimeoutRef.current = window.setTimeout(() => {
+      setDrawerRevealed(true);
+      revealTimeoutRef.current = null;
+    }, DRAWER_GENIE_DETAILS_DELAY_MS);
+  }, [clearRevealTimeout]);
 
   useEffect(() => {
     if (!showGenie) {
       setDrawerRevealed(false);
+      clearRevealTimeout();
       return;
     }
 
     setDrawerRevealed(false);
-    const id = window.setTimeout(
-      () => setDrawerRevealed(true),
-      DRAWER_GENIE_DETAILS_DELAY_MS,
-    );
-    return () => window.clearTimeout(id);
-  }, [showGenie, genieEntranceKey]);
+    clearRevealTimeout();
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      scheduleDrawerReveal();
+    }
+
+    return clearRevealTimeout;
+  }, [showGenie, genieEntranceKey, clearRevealTimeout, scheduleDrawerReveal]);
+
+  const handleGenieAnimationEnd = useCallback(
+    (event: React.AnimationEvent<HTMLDivElement>) => {
+      if (event.target !== event.currentTarget) return;
+      if (event.animationName !== "enter-fade-in") return;
+      scheduleDrawerReveal();
+    },
+    [scheduleDrawerReveal],
+  );
 
   if (!showGenie) return null;
 
@@ -56,6 +87,7 @@ export function ThinkingDrawerGenie({
       data-node-id="10272:7449"
       data-name="Drawer"
       data-collapsed={collapsed}
+      data-genie-hidden={hideGenie}
       aria-expanded={onToggle ? !collapsed : undefined}
       aria-controls={onToggle ? "thinking-trace-v2" : undefined}
       onClick={onToggle}
@@ -67,6 +99,7 @@ export function ThinkingDrawerGenie({
           data-node-id="10272:7467"
           data-name="Option 2 1"
           aria-hidden
+          onAnimationEnd={handleGenieAnimationEnd}
         >
           <img
             className="thinking-drawer-genie__genie-img"

@@ -85,7 +85,7 @@
 }
 
 .chat-row[data-version="1"] .agent-message--open {
-  max-height: 56px;
+  max-height: 28px;
 }
 
 /* Version 1: dot center = drawer genie center (4px + 12px) − 4px step pad − 6px status col */

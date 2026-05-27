@@ -9,6 +9,10 @@ type SettingsBarProps = {
   onRefresh: () => void;
 };
 
+function formatVersionLabel(version: PrototypeVersion): string {
+  return version === "Version 1" ? "Version 1 (latest)" : version;
+}
+
 export function SettingsBar({
   version,
   onVersionChange,
@@ -50,7 +54,7 @@ export function SettingsBar({
       data-name="Bar"
     >
       <p className="settings-bar__title" data-node-id="10252:7723">
-        Settings
+        Genie Thinking Animations
       </p>
 
       <div className="settings-bar__actions">
@@ -63,7 +67,9 @@ export function SettingsBar({
             aria-controls={menuId}
             onClick={() => setOpen((isOpen) => !isOpen)}
           >
-            <span className="settings-bar__version-label">{version}</span>
+            <span className="settings-bar__version-label">
+              {formatVersionLabel(version)}
+            </span>
             <ChevronDownIcon />
           </button>
 

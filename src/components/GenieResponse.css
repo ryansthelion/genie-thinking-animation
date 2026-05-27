@@ -1,4 +1,6 @@
 .genie-response {
+  --genie-response-reveal-duration: 1s;
+
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -13,9 +15,36 @@
   width: 100%;
 }
 
-.genie-response.enter-from-below {
-  --enter-from-below-duration: 0.3s;
-  --enter-from-below-offset: 80px;
+.genie-response__post-chart .response-action-bar {
+  margin-bottom: 40px;
+}
+
+/* Full response reveals at once — fade unmasks top to bottom */
+.genie-response--reveal {
+  opacity: 0;
+  will-change: clip-path, opacity;
+  animation: genie-response-reveal var(--genie-response-reveal-duration)
+    var(--enter-from-below-easing) forwards;
+}
+
+@keyframes genie-response-reveal {
+  from {
+    clip-path: inset(0 0 100% 0);
+    opacity: 0;
+  }
+
+  to {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .genie-response--reveal {
+    opacity: 1;
+    clip-path: none;
+    animation: none;
+  }
 }
 
 .genie-response__section {

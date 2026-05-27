@@ -37,6 +37,12 @@
     width var(--enter-fade-in-duration) var(--enter-from-below-easing);
 }
 
+.thinking-drawer-genie-host[data-genie-hidden="true"] {
+  padding-left: 0;
+  padding-right: 0;
+  background: transparent;
+}
+
 .thinking-drawer-genie-host[data-genie-hidden="true"] .thinking-drawer-genie__genie {
   width: 0;
   opacity: 0;

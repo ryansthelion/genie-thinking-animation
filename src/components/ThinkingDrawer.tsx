@@ -8,6 +8,8 @@ type ThinkingDrawerProps = {
   shimmer?: boolean;
   /** id for aria-controls when the drawer toggles a trace region */
   traceControlsId?: string;
+  /** Link-style control (text + chevron hover) instead of pill button */
+  variant?: "default" | "link";
   onToggle?: () => void;
 };
 
@@ -16,21 +18,13 @@ export function ThinkingDrawer({
   label = "Thinking",
   shimmer = true,
   traceControlsId = "thinking-trace",
+  variant = "default",
   onToggle,
 }: ThinkingDrawerProps) {
-  const Tag = onToggle ? "button" : "div";
+  const isLink = variant === "link";
+  const className = `thinking-drawer${isLink ? " thinking-drawer--link" : ""}`;
 
-  return (
-    <Tag
-      type={onToggle ? "button" : undefined}
-      className="thinking-drawer"
-      data-node-id="9982:70358"
-      data-collapsed={collapsed}
-      data-shimmer={shimmer}
-      aria-expanded={onToggle ? !collapsed : undefined}
-      aria-controls={onToggle ? traceControlsId : undefined}
-      onClick={onToggle}
-    >
+  const row = (
       <div className="thinking-drawer__row" data-node-id="3112:6488">
         {shimmer ? (
           <div className="thinking-drawer__shimmer" data-node-id="3112:6489">
@@ -52,6 +46,55 @@ export function ThinkingDrawer({
         )}
         {collapsed ? <ChevronRightIcon /> : <ChevronDownIcon />}
       </div>
+  );
+
+  if (isLink && onToggle) {
+    return (
+      <a
+        href={`#${traceControlsId}`}
+        className={className}
+        data-node-id="9982:70358"
+        data-collapsed={collapsed}
+        data-shimmer={shimmer}
+        aria-expanded={!collapsed}
+        aria-controls={traceControlsId}
+        onClick={(event) => {
+          event.preventDefault();
+          onToggle();
+        }}
+      >
+        {row}
+      </a>
+    );
+  }
+
+  if (isLink) {
+    return (
+      <div
+        className={className}
+        data-node-id="9982:70358"
+        data-collapsed={collapsed}
+        data-shimmer={shimmer}
+      >
+        {row}
+      </div>
+    );
+  }
+
+  const Tag = onToggle ? "button" : "div";
+
+  return (
+    <Tag
+      type={onToggle ? "button" : undefined}
+      className={className}
+      data-node-id="9982:70358"
+      data-collapsed={collapsed}
+      data-shimmer={shimmer}
+      aria-expanded={onToggle ? !collapsed : undefined}
+      aria-controls={onToggle ? traceControlsId : undefined}
+      onClick={onToggle}
+    >
+      {row}
     </Tag>
   );
 }

@@ -1,4 +1,4 @@
-/* Version 1 — host button wraps genie + embedded ThinkingDrawer (shimmer unchanged) */
+/* Version 1 — host wraps genie + link-style ThinkingDrawer */
 .thinking-drawer-genie-host {
   display: inline-flex;
   align-items: center;
@@ -10,24 +10,6 @@
   padding: 0 var(--spacing-xs);
   font: inherit;
   color: inherit;
-  cursor: default;
-}
-
-button.thinking-drawer-genie-host {
-  cursor: pointer;
-}
-
-button.thinking-drawer-genie-host:hover {
-  background: var(--drawer-hover-bg);
-}
-
-button.thinking-drawer-genie-host:active {
-  background: var(--drawer-press-bg);
-}
-
-button.thinking-drawer-genie-host:focus-visible {
-  outline: 2px solid var(--text-secondary);
-  outline-offset: 2px;
 }
 
 .thinking-drawer-genie__row {
@@ -92,11 +74,6 @@ button.thinking-drawer-genie-host:focus-visible {
   padding: 0;
   background: transparent;
   overflow: visible;
-}
-
-button.thinking-drawer-genie-host .thinking-drawer:hover,
-button.thinking-drawer-genie-host .thinking-drawer:active {
-  background: transparent;
 }
 
 .thinking-drawer-genie-host .thinking-drawer__row {

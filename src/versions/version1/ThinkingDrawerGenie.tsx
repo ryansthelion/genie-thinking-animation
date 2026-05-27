@@ -35,7 +35,6 @@ export function ThinkingDrawerGenie({
 }: ThinkingDrawerGenieProps) {
   const [drawerRevealed, setDrawerRevealed] = useState(false);
   const revealTimeoutRef = useRef<number | null>(null);
-  const Tag = onToggle ? "button" : "div";
 
   const clearRevealTimeout = useCallback(() => {
     if (revealTimeoutRef.current !== null) {
@@ -81,16 +80,12 @@ export function ThinkingDrawerGenie({
   if (!showGenie) return null;
 
   return (
-    <Tag
-      type={onToggle ? "button" : undefined}
+    <div
       className="thinking-drawer-genie-host"
       data-node-id="10272:7449"
       data-name="Drawer"
       data-collapsed={collapsed}
       data-genie-hidden={hideGenie}
-      aria-expanded={onToggle ? !collapsed : undefined}
-      aria-controls={onToggle ? "thinking-trace-v2" : undefined}
-      onClick={onToggle}
     >
       <div className="thinking-drawer-genie__row" data-node-id="10272:7452">
         <div
@@ -120,11 +115,13 @@ export function ThinkingDrawerGenie({
               collapsed={collapsed}
               label={label}
               shimmer={shimmer}
+              variant="link"
               traceControlsId="thinking-trace-v2"
+              onToggle={onToggle}
             />
           ) : null}
         </div>
       </div>
-    </Tag>
+    </div>
   );
 }

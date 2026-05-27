@@ -1,0 +1,28 @@
+/* Full viewport footer — content column matches .chat-row__thread (720px) */
+.prompt-section {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  box-sizing: border-box;
+  width: 100%;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  background: linear-gradient(
+    0deg,
+    var(--background-secondary) 62.08%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  pointer-events: none;
+}
+
+.prompt-section__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-mid);
+  box-sizing: border-box;
+  width: min(var(--chat-thread-max-width), calc(100% - 2 * var(--spacing-md)));
+  margin: 0 auto;
+  padding: 24px 0 var(--spacing-md);
+  pointer-events: auto;
+}

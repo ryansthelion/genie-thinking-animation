@@ -1,7 +1,6 @@
 import { GenieResponse } from "../../components/GenieResponse";
 import { ThinkingDrawerGenie } from "./ThinkingDrawerGenie";
 import { Multisteps } from "../../components/Multisteps";
-import { PromptInput } from "../../components/PromptInput";
 import { useEffect, useState } from "react";
 import { useEntranceKey } from "../../hooks/useEntranceKey";
 import { useGenieAfterBubble } from "../../hooks/useGenieAfterBubble";
@@ -182,7 +181,6 @@ export function Version1ChatRow({
         />
       </div>
 
-      <PromptInput />
     </div>
   );
 }

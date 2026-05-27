@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { PromptSection } from "./components/PromptSection";
 import { SettingsBar } from "./components/SettingsBar";
 import type { PrototypeVersion } from "./versions/types";
 import { Version1Experience } from "./versions/version1/Version1Experience";
@@ -32,6 +33,7 @@ export default function App() {
         onRefresh={handleRefresh}
       />
       <Experience key={`${version}-${experienceKey}`} />
+      <PromptSection />
     </div>
   );
 }

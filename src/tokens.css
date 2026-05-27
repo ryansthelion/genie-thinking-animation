@@ -44,6 +44,7 @@
   --settings-bar-height: 45px;
 
   /** Fixed prompt stack (box-outer ~114px + hint + gaps); used for scroll inset */
+  --chat-thread-max-width: 720px;
   --prompt-input-stack-height: 138px;
 
   /* Border radius — Figma Border Radius/* */

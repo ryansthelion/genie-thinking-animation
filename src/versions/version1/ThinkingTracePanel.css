@@ -1,0 +1,32 @@
+/* Version 1 — trace expand/collapse pushes content below + fades */
+.thinking-trace-panel {
+  --thinking-trace-panel-duration: 0.35s;
+
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows var(--thinking-trace-panel-duration)
+      var(--enter-from-below-easing),
+    opacity var(--thinking-trace-panel-duration) var(--enter-from-below-easing);
+}
+
+.thinking-trace-panel--open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.thinking-trace-panel__inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thinking-trace-panel {
+    transition: none;
+  }
+
+  .thinking-trace-panel:not(.thinking-trace-panel--open) {
+    display: none;
+  }
+}

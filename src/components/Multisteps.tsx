@@ -8,6 +8,8 @@ type MultistepsProps = {
   titleEntranceKey?: number;
   descriptionEntranceKey?: number;
   toolEntranceKey?: number;
+  /** Slide up during auto-play; none when toggling drawer (matches instant close) */
+  entrance?: "from-below" | "none";
   showTitle?: boolean;
   showDescription?: boolean;
   showToolCall?: boolean;
@@ -21,17 +23,21 @@ export function Multisteps({
   titleEntranceKey = 0,
   descriptionEntranceKey = 0,
   toolEntranceKey = 0,
+  entrance = "from-below",
   showTitle = false,
   showDescription = false,
   showToolCall = false,
   pulsingDot = true,
   showStatusLine = false,
 }: MultistepsProps) {
+  const animateIn = entrance === "from-below";
+  const childEnterClass = animateIn ? "enter-from-below" : "";
+
   return (
     <div
       id={id}
       key={entranceKey}
-      className="multisteps enter-from-below"
+      className={`multisteps ${animateIn ? "enter-from-below" : ""}`.trim()}
       data-node-id="9982:70367"
     >
       <div className="multisteps__fade-top" aria-hidden />
@@ -46,7 +52,7 @@ export function Multisteps({
           {showTitle ? (
             <p
               key={titleEntranceKey}
-              className="multisteps__title enter-from-below"
+              className={`multisteps__title ${childEnterClass}`.trim()}
               data-node-id="3942:7977"
             >
               Understanding the question
@@ -57,7 +63,7 @@ export function Multisteps({
               {showDescription ? (
                 <p
                   key={descriptionEntranceKey}
-                  className="multisteps__body enter-from-below"
+                  className={`multisteps__body ${childEnterClass}`.trim()}
                   data-node-id="9982:70456"
                 >
                   I’ll help you find which Databricks engineers are using vibe
@@ -67,7 +73,7 @@ export function Multisteps({
               {showToolCall ? (
                 <div
                   key={toolEntranceKey}
-                  className="tool-call enter-from-below"
+                  className={`tool-call ${childEnterClass}`.trim()}
                   data-node-id="9982:70460"
                 >
                   <Icon

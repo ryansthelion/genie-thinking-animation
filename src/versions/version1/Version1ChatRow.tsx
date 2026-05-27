@@ -7,6 +7,7 @@ import { useEntranceKey } from "../../hooks/useEntranceKey";
 import { useGenieAfterBubble } from "../../hooks/useGenieAfterBubble";
 import type { AnimationPhase } from "../shared/animationPhases";
 import "../shared/chatRowLayout.css";
+import "./ThinkingTracePanel.css";
 
 type Version1ChatRowProps = {
   phase: AnimationPhase;
@@ -79,7 +80,7 @@ export function Version1ChatRow({
   const showMultistepsLive = traceAnimating;
   const showMultistepsExpanded =
     hasTraceContent && traceExpanded && !traceAnimating;
-  const showMultisteps = showMultistepsLive || showMultistepsExpanded;
+  const tracePanelOpen = showMultistepsLive || showMultistepsExpanded;
   const drawerCollapsed = !traceExpanded;
   const canToggleTrace = hasTraceContent;
   useEffect(() => {
@@ -137,34 +138,42 @@ export function Version1ChatRow({
           </div>
         ) : null}
 
-        {showMultisteps ? (
-          <Multisteps
-            id="thinking-trace-v2"
-            entranceKey={showMultistepsExpanded ? traceKey + 1000 : traceKey}
-            titleEntranceKey={showMultistepsExpanded ? titleKey + 1000 : titleKey}
-            descriptionEntranceKey={
-              showMultistepsExpanded ? descriptionKey + 1000 : descriptionKey
-            }
-            toolEntranceKey={showMultistepsExpanded ? toolKey + 1000 : toolKey}
-            pulsingDot={showMultistepsLive && phase === "trace-pulse"}
-            showStatusLine={
-              showMultistepsExpanded ||
-              phase === "trace-description" ||
-              phase === "trace-tool"
-            }
-            showTitle={
-              showMultistepsExpanded ||
-              phase === "trace-title" ||
-              phase === "trace-description" ||
-              phase === "trace-tool"
-            }
-            showDescription={
-              showMultistepsExpanded ||
-              phase === "trace-description" ||
-              phase === "trace-tool"
-            }
-            showToolCall={showMultistepsExpanded || phase === "trace-tool"}
-          />
+        {hasTraceContent ? (
+          <div
+            className={`thinking-trace-panel ${
+              tracePanelOpen ? "thinking-trace-panel--open" : ""
+            }`}
+            aria-hidden={!tracePanelOpen}
+          >
+            <div className="thinking-trace-panel__inner">
+              <Multisteps
+                id="thinking-trace-v2"
+                entrance="none"
+                entranceKey={traceKey}
+                titleEntranceKey={titleKey}
+                descriptionEntranceKey={descriptionKey}
+                toolEntranceKey={toolKey}
+                pulsingDot={showMultistepsLive && phase === "trace-pulse"}
+                showStatusLine={
+                  showMultistepsExpanded ||
+                  phase === "trace-description" ||
+                  phase === "trace-tool"
+                }
+                showTitle={
+                  showMultistepsExpanded ||
+                  phase === "trace-title" ||
+                  phase === "trace-description" ||
+                  phase === "trace-tool"
+                }
+                showDescription={
+                  showMultistepsExpanded ||
+                  phase === "trace-description" ||
+                  phase === "trace-tool"
+                }
+                showToolCall={showMultistepsExpanded || phase === "trace-tool"}
+              />
+            </div>
+          </div>
         ) : null}
 
         <GenieResponse

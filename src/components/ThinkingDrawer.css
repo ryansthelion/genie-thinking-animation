@@ -59,12 +59,9 @@ div.thinking-drawer--link:hover .thinking-drawer__label {
   color: var(--text-primary);
 }
 
-a.thinking-drawer--link:hover .chevron-right-icon__path,
-a.thinking-drawer--link:focus-visible .chevron-right-icon__path,
-a.thinking-drawer--link:hover .chevron-down-icon__path,
-a.thinking-drawer--link:focus-visible .chevron-down-icon__path,
-div.thinking-drawer--link:hover .chevron-right-icon__path,
-div.thinking-drawer--link:hover .chevron-down-icon__path {
+a.thinking-drawer--link:hover .thinking-drawer-chevron__path,
+a.thinking-drawer--link:focus-visible .thinking-drawer-chevron__path,
+div.thinking-drawer--link:hover .thinking-drawer-chevron__path {
   filter: brightness(0);
 }
 
@@ -72,6 +69,10 @@ a.thinking-drawer--link:focus-visible {
   outline: 2px solid var(--text-secondary);
   outline-offset: 2px;
   border-radius: var(--border-radius-md);
+}
+
+.thinking-drawer {
+  --thinking-drawer-chevron-duration: 0.35s;
 }
 
 .thinking-drawer__row {

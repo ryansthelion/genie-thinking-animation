@@ -1,5 +1,4 @@
-import { ChevronDownIcon } from "./ChevronDownIcon";
-import { ChevronRightIcon } from "./ChevronRightIcon";
+import { ThinkingDrawerChevron } from "./ThinkingDrawerChevron";
 import "./ThinkingDrawer.css";
 
 type ThinkingDrawerProps = {
@@ -44,7 +43,7 @@ export function ThinkingDrawer({
             {label}
           </span>
         )}
-        {collapsed ? <ChevronRightIcon /> : <ChevronDownIcon />}
+        <ThinkingDrawerChevron collapsed={collapsed} />
       </div>
   );
 
